@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nuoto Libero – Corsie disponibili</title><style>
+:root{--bg1:#04162b;--bg2:#0a3a5c;--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.14);--tx:#e8f4ff;--mu:#93b4cc;
+--g:#22c55e;--y:#f5b50a;--r:#ef4444;--x:#64748b;--ac:#38bdf8}
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(56,189,248,.35)}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tx);min-height:100vh;
+background:radial-gradient(1200px 600px at 80% -10%,#0e7490 0,transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 14px 60px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
+h1{margin:0;font-size:clamp(26px,5vw,40px);letter-spacing:-.5px}
+h1 small{display:block;font-size:.45em;font-weight:500;color:var(--ac);letter-spacing:1px;text-transform:uppercase}
+.period{display:inline-block;margin-top:6px;padding:5px 14px;border-radius:99px;background:var(--card);border:1px solid var(--bd);font-weight:600}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;color:var(--tx);background:var(--card);border:2px solid var(--bd);padding:8px 14px;border-radius:12px;cursor:pointer;transition:.12s;touch-action:manipulation}
+@media(hover:hover){button:hover{background:rgba(255,255,255,.16)}}
+button.on{background:var(--ac);color:#04162b;font-weight:700;border-color:#fff}
+button:active,.hc:active,.dn:active{transform:scale(.94);border-color:#fff;box-shadow:0 0 0 3px var(--ac),0 0 14px var(--ac);filter:brightness(1.25)}
+button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;border-color:#fff}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.card h2{margin:0 0 12px;font-size:15px;text-transform:uppercase;letter-spacing:1.2px;color:var(--mu)}
+.now{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.big{width:96px;height:96px;border-radius:26px;display:grid;place-items:center;font-size:56px;font-weight:800;color:#04162b;flex:none}
+.now .t{font-size:22px;font-weight:700}.now .s{color:var(--mu);margin-top:4px}
+.c-g{background:var(--g)}.c-y{background:var(--y)}.c-r{background:var(--r)}.c-x{background:var(--x);color:#fff}.c-n{background:repeating-linear-gradient(45deg,#334155,#334155 4px,#1e293b 4px,#1e293b 8px);color:#94a3b8}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mu);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.hg{display:grid;grid-template-columns:84px repeat(25,minmax(16px,1fr));gap:2px;min-width:560px;align-items:center}
+.hg .hl{font-size:11px;color:var(--mu);grid-column:span 2;text-align:left}
+.hg .dn{font-size:13px;font-weight:600;cursor:pointer;padding:4px 6px;border:2px solid transparent;border-radius:8px;user-select:none}
+.hg .dn.today{color:var(--ac)}
+.hg .dn.sel{border-color:#fff;background:rgba(56,189,248,.25);box-shadow:0 0 10px rgba(56,189,248,.6)}
+.hc{height:26px;border-radius:5px;cursor:pointer;display:grid;place-items:center;font-size:11px;font-weight:700;color:#04162b;border:2px solid transparent;user-select:none}
+.hc.c-x,.hc.c-n{color:#cbd5e1}
+.hc.rowsel{border-color:rgba(255,255,255,.9)}
+.hc.nowc{outline:2px solid #fff;outline-offset:1px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 4px 8px;margin-bottom:8px}
+.tabs button{flex:1;min-width:84px;white-space:nowrap}
+.tabs button.today:not(.on){border-color:var(--ac)}
+.tabs button.on{background:var(--ac);color:#04162b;font-weight:700;border-color:#fff;box-shadow:0 0 0 3px rgba(56,189,248,.55),0 0 16px rgba(56,189,248,.6)}
+.slot{display:grid;grid-template-columns:130px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;margin-bottom:8px;background:rgba(255,255,255,.05);border:2px solid transparent;border-left:8px solid var(--x)}
+.slot.c-g{border-left-color:var(--g);background:rgba(34,197,94,.1)}.slot.c-y{border-left-color:var(--y);background:rgba(245,181,10,.1)}.slot.c-r{border-left-color:var(--r);background:rgba(239,68,68,.1)}
+.slot.cur{border-color:#fff;border-left-color:#fff}
+.slot .h{font-weight:700;font-size:17px}
+.slot .m{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.num{font-size:30px;font-weight:800;min-width:34px;text-align:center}
+.ln{display:flex;gap:4px}.ln span{width:16px;height:26px;border-radius:5px;background:rgba(255,255,255,.12)}
+.ln span.f{background:currentColor}
+.slot.c-g .num,.slot.c-g .ln{color:var(--g)}.slot.c-y .num,.slot.c-y .ln{color:var(--y)}.slot.c-r .num,.slot.c-r .ln{color:var(--r)}.slot.c-x .num,.slot.c-x .ln{color:var(--x)}
+.note{font-size:13px;background:rgba(255,255,255,.12);padding:3px 10px;border-radius:99px;color:var(--tx)}
+.chip{display:inline-block;padding:6px 14px;border-radius:99px;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.5);font-weight:700;margin:0 8px 8px 0}
+.btn-book{background:var(--ac);color:#04162b;font-weight:700;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:13px;white-space:nowrap}
+.btn-book:disabled{background:var(--x);color:#cbd5e1;cursor:not-allowed;opacity:.6}
+.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);display:none;place-items:center;z-index:999;backdrop-filter:blur(4px)}
+.modal-bg.open{display:grid}
+.modal{background:#0a3a5c;border:1px solid var(--bd);border-radius:20px;padding:22px;max-width:420px;width:90%;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.modal h3{margin:0 0 6px;color:var(--ac);font-size:20px}
+.modal p{margin:0 0 16px;color:var(--mu);font-size:14px}
+.modal-form{display:flex;flex-direction:column;gap:12px}
+.modal-form label{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}
+.modal-form input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:rgba(0,0,0,.4);color:var(--tx);font:inherit}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.btn-p{background:var(--ac);color:#04162b;font-weight:700;border:none;padding:10px 18px;border-radius:10px;cursor:pointer}
+.btn-c{background:rgba(255,255,255,.1);color:var(--tx);border:1px solid var(--bd);padding:10px 18px;border-radius:10px;cursor:pointer}
+.info{color:var(--mu);font-size:13px;margin-top:8px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#fff;color:#04162b;padding:8px 18px;border-radius:99px;font-weight:700;opacity:0;transition:.3s;pointer-events:none;z-index:1000}
+.toast.s{opacity:1}
+@media(max-width:620px){.slot{grid-template-columns:1fr}.big{width:78px;height:78px;font-size:44px}}
+@media print{body{background:#fff;color:#000}.tools,.edbar,.tabs,.toast,.modal-bg{display:none!important}.card{border-color:#999;background:#fff;backdrop-filter:none}.card h2,.now .s,.legend,.info{color:#333}.hc,.big,.slot{print-color-adjust:exact;-webkit-print-color-adjust:exact}.slot .h,.now .t{color:#000!important}}
+</style></head>
+<body>
+<div class="wrap" id="app"></div>
+
+<!-- MODALE FORM PRENOTAZIONE -->
+<div class="modal-bg" id="bookingModal">
+  <div class="modal">
+    <h3>Prenota Corsia</h3>
+    <p id="modalSub"></p>
+    <form class="modal-form" id="bookingForm">
+      <div>
+        <label for="mNome">Nome</label>
+        <input type="text" id="mNome" required placeholder="Es. Mario">
+      </div>
+      <div>
+        <label for="mCognome">Cognome</label>
+        <input type="text" id="mCognome" required placeholder="Es. Rossi">
+      </div>
+      <div>
+        <label for="mTel">Telefono</label>
+        <input type="tel" id="mTel" required placeholder="Es. 3331234567">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-c" onclick="closeModal()">Annulla</button>
+        <button type="submit" class="btn-p" id="mSubmitBtn">Conferma</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script id="dati" type="application/json">{"titolo":"Nuoto Libero","periodo":"Settembre – Dicembre 2026","tel":"335.351136","avviso":"Le corsie e gli orari possono subire modifiche per motivi di forza maggiore","totCorsie":6,"maxVasca":10,"rev":1791015622380,"days":[{"name":"Lunedì","slots":[{"s":"09:00","e":"10:00","n":4,"note":""},{"s":"10:00","e":"11:00","n":3,"note":""},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:15","e":"13:15","n":6,"note":"poi 3 dal 9/11"},{"s":"13:15","e":"14:00","n":4,"note":""},{"s":"14:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"21:30","n":2,"note":""}],"vasca":[{"s":"12:10","e":"15:00"}]},{"name":"Martedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"11:00","n":3,"note":""},{"s":"11:00","e":"14:00","n":4,"note":""},{"s":"14:00","e":"16:30","n":1,"note":""},{"s":"16:30","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:30","e":"10:30"},{"s":"11:45","e":"15:00"}]},{"name":"Mercoledì","slots":[{"s":"09:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":3,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"17:00","n":2,"note":""},{"s":"17:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"20:45","n":2,"note":""},{"s":"20:45","e":"21:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"16:00"}]},{"name":"Giovedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"10:20","n":2,"note":""},{"s":"10:20","e":"11:10","n":3,"note":""},{"s":"11:10","e":"12:10","n":6,"note":""},{"s":"12:10","e":"14:15","n":4,"note":"poi 2 dal 12/11"},{"s":"14:15","e":"16:30","n":1,"note":""},{"s":"16:30","e":"17:30","n":4,"note":""},{"s":"17:30","e":"21:30","n":1,"note":""}],"vasca":[{"s":"09:00","e":"15:30"}]},{"name":"Venerdì","slots":[{"s":"09:00","e":"10:00","n":5,"note":""},{"s":"10:00","e":"11:00","n":4,"note":"da Dicembre 2 corsie"},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":2,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"16:50","n":2,"note":""},{"s":"16:50","e":"17:15","n":1,"note":""},{"s":"17:15","e":"18:00","n":3,"note":""},{"s":"18:00","e":"19:10","n":2,"note":""},{"s":"19:10","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:00","e":"17:20"}]},{"name":"Sabato","slots":[{"s":"09:00","e":"11:30","n":4,"note":""},{"s":"11:30","e":"12:10","n":5,"note":""},{"s":"12:10","e":"13:10","n":3,"note":""},{"s":"13:10","e":"17:15","n":2,"note":""},{"s":"17:15","e":"18:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"10:00"},{"s":"12:00","e":"17:15"}]},{"name":"Domenica","slots":[],"vasca":[{"s":"09:00","e":"12:30"}]}]}</script>
+
+<script>(function viewerMain(){
+ // INSERISCI QUI L'URL DELLA TUA WEB APP GOOGLE APPS SCRIPT
+ const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwv765VbCY-1HYXyH4jtpETqCFkx6BBvaLWyLFTuLGWPD6xtPdNxaeyl7r1cmCYyFm9Ag/exec";
+
+ let D = JSON.parse(document.getElementById('dati').textContent);
+ let sel = null;
+ let activeSlot = null;
+
+ const $ = s => document.querySelector(s);
+ const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+ const tm = t => { const [a, b] = (t || '0:0').split(':'); return (+a) * 60 + (+b) };
+ const fmt = t => { const [a, b] = t.split(':'); return (+a) + ':' + b };
+ const cls = n => n <= 0 ? 'c-x' : n >= 5 ? 'c-g' : n >= 3 ? 'c-y' : 'c-r';
+ const todayIdx = () => (new Date().getDay() + 6) % 7;
+ const nowMin = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes() };
+ const slotAt = (di, m) => D.days[di].slots.find(s => tm(s.s) <= m && m < tm(s.e));
+ const lab = n => n <= 0 ? 'Chiuso' : n + (n == 1 ? ' corsia' : ' corsie');
+ const lanes = n => { let h = ''; for (let i = 0; i < D.totCorsie; i++) h += '<span class="' + (i < n ? 'f' : '') + '"></span>'; return '<div class="ln">' + h + '</div>' };
+ const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('s'); setTimeout(() => t.classList.remove('s'), 2500); };
+
+ async function fetchSheetsData() {
+  if (GOOGLE_SHEETS_URL && GOOGLE_SHEETS_URL !== "INSERISCI_QUI_URL_WEB_APP") {
+   try {
+    const res = await fetch(GOOGLE_SHEETS_URL);
+    if (res.ok) {
+     const json = await res.json();
+     if (json && json.days) D = json;
+    }
+   } catch (e) {
+    console.warn("Uso dati locali predefiniti.", e);
+   }
+  }
+ }
+
+ window.pick = i => { sel = i; render(); };
+
+ window.openModal = (dayIdx, slotIdx) => {
+  const day = D.days[dayIdx];
+  const slot = day.slots[slotIdx];
+  activeSlot = { giorno: day.name, oraInizio: slot.s, oraFine: slot.e };
+  $('#modalSub').textContent = `${day.name} · ${fmt(slot.s)} – ${fmt(slot.e)}`;
+  $('#bookingModal').classList.add('open');
+ };
+
+ window.closeModal = () => {
+  $('#bookingModal').classList.remove('open');
+  $('#bookingForm').reset();
+  activeSlot = null;
+ };
+
+ $('#bookingForm').onsubmit = async (e) => {
+  e.preventDefault();
+  if (!activeSlot) return;
+
+  const btn = $('#mSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = "Invio...";
+
+  const payload = {
+   action: "book",
+   giorno: activeSlot.giorno,
+   oraInizio: activeSlot.oraInizio,
+   oraFine: activeSlot.oraFine,
+   nome: $('#mNome').value.trim(),
+   cognome: $('#mCognome').value.trim(),
+   telefono: $('#mTel').value.trim()
+  };
+
+  try {
+   const res = await fetch(GOOGLE_SHEETS_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+   });
+   const data = await res.json();
+   if (data.status === 'SUCCESS') {
+    toast("✅ Prenotazione confermata!");
+    closeModal();
+    await fetchSheetsData();
+    render();
+   } else {
+    toast("❌ " + (data.message || "Prenotazione non riuscita"));
+   }
+  } catch (err) {
+   toast("❌ Errore durante l'invio. Riprova.");
+  } finally {
+   btn.disabled = false;
+   btn.textContent = "Conferma";
+  }
+ };
+
+ function render() {
+  const ti = todayIdx(); if (sel === null) sel = ti;
+  const nm = nowMin(), cur = slotAt(ti, nm), cd = D.days[ti];
+  let nowHtml;
+  if (cur) {
+   const nx = cd.slots.find(s => tm(s.s) >= tm(cur.e) && tm(s.s) - tm(cur.e) < 1);
+   nowHtml = `<div class="big ${cls(cur.n)}">${cur.n}</div><div><div class="t">${cur.n > 0 ? lab(cur.n) + ' disponibili ora' : 'Nuoto libero chiuso ora'}</div><div class="s">${cd.name} · fino alle ${fmt(cur.e)}${cur.note ? ' · ' + esc(cur.note) : ''}${nx ? ' · poi ' + nx.n + (nx.n == 1 ? ' corsia' : ' corsie') : ''}</div></div>`;
+  } else {
+   const nxt = cd.slots.find(s => tm(s.s) > nm);
+   nowHtml = `<div class="big c-n">–</div><div><div class="t">Nessun dato per quest'ora</div><div class="s">${cd.name}${nxt ? ' · prossima fascia alle ' + fmt(nxt.s) + ' (' + lab(nxt.n) + ')' : ' · fascia oraria terminata'}</div></div>`;
+  }
+  const d = D.days[sel];
+  let sl = '';
+  d.slots.forEach((s, idx) => {
+   const isCur = sel == ti && tm(s.s) <= nm && nm < tm(s.e);
+   const canBook = s.n > 0;
+   sl += `<div class="slot ${cls(s.n)} ${isCur ? 'cur' : ''}">
+    <div class="h">${fmt(s.s)} – ${fmt(s.e)}${isCur ? ' <span class="note">ORA</span>' : ''}</div>
+    <div class="m"><div class="num">${s.n > 0 ? s.n : '×'}</div>${s.n > 0 ? lanes(s.n) : ''}<span>${s.n > 0 ? lab(s.n) : ''}</span>${s.note ? `<span class="note">${esc(s.note)}</span>` : ''}</div>
+    <div><button class="btn-book" ${canBook ? `onclick="openModal(${sel},${idx})"` : 'disabled'}>${canBook ? 'Prenota' : 'Pieno'}</button></div>
+   </div>`;
+  });
+  const vnow = sel == ti ? d.vasca.find(v => tm(v.s) <= nm && nm < tm(v.e)) : null;
+  const vs = d.vasca.length ? d.vasca.map(v => `<span class="chip">${fmt(v.s)} – ${fmt(v.e)}</span>`).join('') : '<span class="info">Chiusa in questo giorno</span>';
+  const y = window.scrollY;
+  $('#app').innerHTML = `
+  <header><div><h1><small>Piscina · Corsie disponibili</small>${esc(D.titolo)}</h1><span class="period">📅 ${esc(D.periodo)}</span></div></header>
+  <div class="card"><h2>Adesso</h2><div class="now">${nowHtml}</div>
+   <div class="legend"><span><i class="c-g"></i>5-6 corsie: tanto posto</span><span><i class="c-y"></i>3-4: posto medio</span><span><i class="c-r"></i>1-2: poco posto</span><span><i class="c-x"></i>chiuso</span></div></div>
+  <div class="card"><h2>${d.name} – dettaglio</h2>
+   <div class="tabs">${D.days.map((x, i) => `<button class="${i == sel ? 'on' : ''} ${i == ti ? 'today' : ''}" onclick="pick(${i})">${x.name}${i == ti ? ' •' : ''}</button>`).join('')}</div>
+   ${sl}<div class="info">Nuoto libero su prenotazione al <b>${esc(D.tel)}</b></div></div>
+  <div class="card"><h2>Vaschetta libera interna · ${d.name}</h2>${vs}
+   <div class="info">${vnow ? '🟢 Aperta ora · ' : ''}Ingresso consentito a max ${D.maxVasca} persone</div></div>
+  <div class="info" style="text-align:center">⚠ ${esc(D.avviso)}</div>`;
+  window.scrollTo(0, y);
+ }
+
+ async function init() {
+  await fetchSheetsData();
+  render();
+ }
+
+ init();
+ setInterval(async () => {
+  await fetchSheetsData();
+  render();
+ }, 60000);
+})()</script></body></html>
