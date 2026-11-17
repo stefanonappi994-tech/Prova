@@ -100,7 +100,9 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
  // true = i dati di Google Sheets sovrascrivono le corsie incorporate nel file
  const SHEET_OVERRIDE = false;
 
- let D = JSON.parse(document.getElementById('dati').textContent);
+ let BASE = JSON.parse(document.getElementById('dati').textContent);
+ let D = JSON.parse(JSON.stringify(BASE));
+ let BOOK = [];
  let sel = null;
  let activeSlot = null;
 
@@ -122,12 +124,33 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
     const res = await fetch(GOOGLE_SHEETS_URL);
     if (res.ok) {
      const json = await res.json();
-     if (SHEET_OVERRIDE && json && json.days) D = json;
+     if (json) {
+      const L = json.prenotazioni || json.bookings || json.prenotati;
+      if (Array.isArray(L)) BOOK = L;
+      if (SHEET_OVERRIDE && json.days) BASE = json;
+     }
     }
    } catch (e) {
     console.warn("Uso dati locali predefiniti.", e);
    }
   }
+ }
+
+ const mins = t => { const m = String(t == null ? '' : t).match(/(\d{1,2}):(\d{2})/); return m ? (+m[1]) * 60 + (+m[2]) : -1; };
+ const pad = n => String(n).padStart(2, '0');
+ const nextDate = giorno => {
+  const idx = BASE.days.findIndex(x => x.name === giorno);
+  const d = new Date(); d.setDate(d.getDate() + ((idx - todayIdx() + 7) % 7));
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+ };
+ function applyBookings() {
+  D = JSON.parse(JSON.stringify(BASE));
+  BOOK.forEach(b => {
+   const day = D.days.find(x => x.name === b.giorno); if (!day) return;
+   if (b.data && String(b.data).slice(0, 10) !== nextDate(day.name)) return;
+   const sl = day.slots.find(x => mins(x.s) === mins(b.oraInizio) && mins(x.e) === mins(b.oraFine));
+   if (sl && sl.n > 0) sl.n -= 1;
+  });
  }
 
  window.pick = i => { sel = i; render(); };
@@ -161,7 +184,8 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
    oraFine: activeSlot.oraFine,
    nome: $('#mNome').value.trim(),
    cognome: $('#mCognome').value.trim(),
-   telefono: $('#mTel').value.trim()
+   telefono: $('#mTel').value.trim(),
+   data: nextDate(activeSlot.giorno)
   };
 
   try {
@@ -171,6 +195,7 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
    });
    const data = await res.json();
    if (data.status === 'SUCCESS') {
+    BOOK.push(Object.assign({}, payload));
     toast("✅ Prenotazione confermata!");
     closeModal();
     await fetchSheetsData();
@@ -187,6 +212,7 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
  };
 
  function render() {
+  applyBookings();
   const ti = todayIdx(); if (sel === null) sel = ti;
   const nm = nowMin(), cur = slotAt(ti, nm), cd = D.days[ti];
   let nowHtml;
