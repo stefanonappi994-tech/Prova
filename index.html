@@ -67,11 +67,7 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
 .toast.s{opacity:1}
 @media(max-width:620px){.slot{grid-template-columns:1fr}.big{width:78px;height:78px;font-size:44px}}
 @media print{body{background:#fff;color:#000}.tools,.edbar,.tabs,.toast,.modal-bg{display:none!important}.card{border-color:#999;background:#fff;backdrop-filter:none}.card h2,.now .s,.legend,.info{color:#333}.hc,.big,.slot{print-color-adjust:exact;-webkit-print-color-adjust:exact}.slot .h,.now .t{color:#000!important}}
-</style></head>
-<body>
-<div class="wrap" id="app"></div>
-
-<!-- MODALE FORM PRENOTAZIONE -->
+</style></head><body><div class="wrap" id="app"></div><!-- MODALE FORM PRENOTAZIONE -->
 <div class="modal-bg" id="bookingModal">
   <div class="modal">
     <h3>Prenota Corsia</h3>
@@ -97,13 +93,12 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
-
-<script id="dati" type="application/json">{"titolo":"Nuoto Libero","periodo":"Settembre – Dicembre 2026","tel":"335.351136","avviso":"Le corsie e gli orari possono subire modifiche per motivi di forza maggiore","totCorsie":6,"maxVasca":10,"rev":1791015622380,"days":[{"name":"Lunedì","slots":[{"s":"09:00","e":"10:00","n":4,"note":""},{"s":"10:00","e":"11:00","n":3,"note":""},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:15","e":"13:15","n":6,"note":"poi 3 dal 9/11"},{"s":"13:15","e":"14:00","n":4,"note":""},{"s":"14:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"21:30","n":2,"note":""}],"vasca":[{"s":"12:10","e":"15:00"}]},{"name":"Martedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"11:00","n":3,"note":""},{"s":"11:00","e":"14:00","n":4,"note":""},{"s":"14:00","e":"16:30","n":1,"note":""},{"s":"16:30","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:30","e":"10:30"},{"s":"11:45","e":"15:00"}]},{"name":"Mercoledì","slots":[{"s":"09:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":3,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"17:00","n":2,"note":""},{"s":"17:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"20:45","n":2,"note":""},{"s":"20:45","e":"21:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"16:00"}]},{"name":"Giovedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"10:20","n":2,"note":""},{"s":"10:20","e":"11:10","n":3,"note":""},{"s":"11:10","e":"12:10","n":6,"note":""},{"s":"12:10","e":"14:15","n":4,"note":"poi 2 dal 12/11"},{"s":"14:15","e":"16:30","n":1,"note":""},{"s":"16:30","e":"17:30","n":4,"note":""},{"s":"17:30","e":"21:30","n":1,"note":""}],"vasca":[{"s":"09:00","e":"15:30"}]},{"name":"Venerdì","slots":[{"s":"09:00","e":"10:00","n":5,"note":""},{"s":"10:00","e":"11:00","n":4,"note":"da Dicembre 2 corsie"},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":2,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"16:50","n":2,"note":""},{"s":"16:50","e":"17:15","n":1,"note":""},{"s":"17:15","e":"18:00","n":3,"note":""},{"s":"18:00","e":"19:10","n":2,"note":""},{"s":"19:10","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:00","e":"17:20"}]},{"name":"Sabato","slots":[{"s":"09:00","e":"11:30","n":4,"note":""},{"s":"11:30","e":"12:10","n":5,"note":""},{"s":"12:10","e":"13:10","n":3,"note":""},{"s":"13:10","e":"17:15","n":2,"note":""},{"s":"17:15","e":"18:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"10:00"},{"s":"12:00","e":"17:15"}]},{"name":"Domenica","slots":[],"vasca":[{"s":"09:00","e":"12:30"}]}]}</script>
-
-<script>(function viewerMain(){
+<div class="toast" id="toast"></div><script id="dati" type="application/json">{"titolo":"Nuoto Libero","periodo":"Settembre – Dicembre 2026","tel":"335.351136","avviso":"Le corsie e gli orari possono subire modifiche per motivi di forza maggiore","totCorsie":6,"maxVasca":10,"rev":1791015622380,"days":[{"name":"Lunedì","slots":[{"s":"09:00","e":"10:00","n":4,"note":""},{"s":"10:00","e":"11:00","n":3,"note":""},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:15","e":"13:15","n":6,"note":"poi 3 dal 9/11"},{"s":"13:15","e":"14:00","n":4,"note":""},{"s":"14:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"21:30","n":2,"note":""}],"vasca":[{"s":"12:10","e":"15:00"}]},{"name":"Martedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"11:00","n":3,"note":""},{"s":"11:00","e":"14:00","n":4,"note":""},{"s":"14:00","e":"16:30","n":1,"note":""},{"s":"16:30","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:30","e":"10:30"},{"s":"11:45","e":"15:00"}]},{"name":"Mercoledì","slots":[{"s":"09:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":3,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"17:00","n":2,"note":""},{"s":"17:00","e":"18:00","n":1,"note":""},{"s":"18:00","e":"20:45","n":2,"note":""},{"s":"20:45","e":"21:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"16:00"}]},{"name":"Giovedì","slots":[{"s":"09:00","e":"09:30","n":5,"note":""},{"s":"09:30","e":"10:20","n":2,"note":""},{"s":"10:20","e":"11:10","n":3,"note":""},{"s":"11:10","e":"12:10","n":6,"note":""},{"s":"12:10","e":"14:15","n":4,"note":"poi 2 dal 12/11"},{"s":"14:15","e":"16:30","n":1,"note":""},{"s":"16:30","e":"17:30","n":4,"note":""},{"s":"17:30","e":"21:30","n":1,"note":""}],"vasca":[{"s":"09:00","e":"15:30"}]},{"name":"Venerdì","slots":[{"s":"09:00","e":"10:00","n":5,"note":""},{"s":"10:00","e":"11:00","n":4,"note":"da Dicembre 2 corsie"},{"s":"11:00","e":"12:00","n":5,"note":""},{"s":"12:00","e":"14:00","n":2,"note":""},{"s":"14:00","e":"16:00","n":0,"note":"Nuoto libero chiuso"},{"s":"16:00","e":"16:50","n":2,"note":""},{"s":"16:50","e":"17:15","n":1,"note":""},{"s":"17:15","e":"18:00","n":3,"note":""},{"s":"18:00","e":"19:10","n":2,"note":""},{"s":"19:10","e":"21:30","n":2,"note":""}],"vasca":[{"s":"09:00","e":"17:20"}]},{"name":"Sabato","slots":[{"s":"09:00","e":"11:30","n":4,"note":""},{"s":"11:30","e":"12:10","n":5,"note":""},{"s":"12:10","e":"13:10","n":3,"note":""},{"s":"13:10","e":"17:15","n":2,"note":""},{"s":"17:15","e":"18:30","n":4,"note":""}],"vasca":[{"s":"09:00","e":"10:00"},{"s":"12:00","e":"17:15"}]},{"name":"Domenica","slots":[],"vasca":[{"s":"09:00","e":"12:30"}]}]}</script><script>(function viewerMain(){
  // INSERISCI QUI L'URL DELLA TUA WEB APP GOOGLE APPS SCRIPT
  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwv765VbCY-1HYXyH4jtpETqCFkx6BBvaLWyLFTuLGWPD6xtPdNxaeyl7r1cmCYyFm9Ag/exec";
+
+ // true = i dati di Google Sheets sovrascrivono le corsie incorporate nel file
+ const SHEET_OVERRIDE = false;
 
  let D = JSON.parse(document.getElementById('dati').textContent);
  let sel = null;
@@ -127,7 +122,7 @@ button:focus-visible,input:focus{outline:3px solid var(--ac);outline-offset:2px;
     const res = await fetch(GOOGLE_SHEETS_URL);
     if (res.ok) {
      const json = await res.json();
-     if (json && json.days) D = json;
+     if (SHEET_OVERRIDE && json && json.days) D = json;
     }
    } catch (e) {
     console.warn("Uso dati locali predefiniti.", e);
